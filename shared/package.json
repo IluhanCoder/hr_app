@@ -1,0 +1,8 @@
+{
+  "name": "@hr-app/shared",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Shared types and utilities for HR App",
+  "main": "index.ts",
+  "types": "index.ts"
+}

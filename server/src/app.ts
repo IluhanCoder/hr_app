@@ -25,7 +25,7 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 const MONGODB_URI = process.env.MONGODB_URI;
 if (!MONGODB_URI) {
-  console.error("Missing MONGODB_URI environment variable");
+  console.error("❌ MONGODB_URI environment variable is required");
   process.exit(1);
 }
 const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3000";

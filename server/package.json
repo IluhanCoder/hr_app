@@ -1,0 +1,53 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "HR Management System Backend",
+  "main": "dist/src/app.js",
+  "scripts": {
+    "dev": "tsx watch src/app.ts",
+    "build": "tsc",
+    "start": "node dist/src/app.js",
+    "clean": "rm -rf dist",
+    "migrate:salary": "tsx src/scripts/migrate-salary-info.ts",
+    "migrate:demographics": "tsx src/scripts/migrate-demographics.ts",
+    "seed:recruitment": "tsx src/scripts/seed.recruitment.demo.ts",
+    "seed:users": "tsx src/scripts/seed.users.demo.ts",
+    "enrich:candidates": "tsx src/scripts/enrich.candidates.demo.ts",
+    "check:candidates": "tsx src/scripts/check.candidates.ts",
+    "check:users": "tsx src/scripts/check.users.ts",
+    "migrate:to-test": "tsx src/scripts/migrate.to.test.ts",
+    "migrate:performance-potential": "tsx src/scripts/migrate.performance.potential.ts",
+    "seed:time": "tsx src/scripts/seed.time.demo.ts",
+    "migrate:set-demo-passwords": "tsx src/scripts/migrate.set.demo.passwords.ts",
+    "seed:full-demo": "tsx src/scripts/seed.full.demo.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/node": "^24.10.1",
+    "@types/pdfkit": "^0.17.4",
+    "@types/regression": "^2.0.6",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/express": "^5.0.5",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/mongoose": "^5.11.96",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^9.0.0",
+    "nodemon": "^3.1.11",
+    "pdfkit": "^0.17.2",
+    "regression": "^2.0.1",
+    "simple-statistics": "^7.8.8"
+  }
+}

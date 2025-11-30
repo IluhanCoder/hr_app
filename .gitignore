@@ -1,24 +1,22 @@
-# Global ignores for monorepo
-
-# Node dependencies (root, client, server)
+# Dependencies
 node_modules/
 client/node_modules/
 server/node_modules/
+shared/node_modules/
 
 # Build outputs
 server/dist/
 client/build/
 
-# TypeScript build info
-*.tsbuildinfo
-
-# Environment files (keep example)
+# Environment variables
 .env
-.env.*
-!.env.example
+.env.local
+.env.*.local
 server/.env
-server/.env.*
 !server/.env.example
+
+# TypeScript
+*.tsbuildinfo
 
 # Logs
 logs/
@@ -28,15 +26,20 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# OS / Editor
+# OS
 .DS_Store
 Thumbs.db
+
+# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
+*.sublime-*
 
-# Misc cache
+# Testing
 coverage/
+
+# Misc
 .pnp
 .pnp.js

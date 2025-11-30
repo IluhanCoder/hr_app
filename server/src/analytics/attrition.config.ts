@@ -1,0 +1,31 @@
+
+
+function num(name: string, def: number): number {
+  const v = process.env[name];
+  if (v == null) return def;
+  const n = Number(v);
+  return Number.isFinite(n) ? n : def;
+}
+
+export const AttritionConfig = {
+  THRESHOLD: num("ATTRITION_RISK_THRESHOLD", 70),
+  WEIGHTS: {
+    PERFORMANCE: num("ATTRITION_WEIGHT_PERFORMANCE", 10),
+    POTENTIAL: num("ATTRITION_WEIGHT_POTENTIAL", 5),
+    REVIEW_STALENESS: num("ATTRITION_WEIGHT_REVIEW_STALENESS", 1.5),
+    TENURE_FIRST_YEAR: num("ATTRITION_WEIGHT_TENURE_FIRST_YEAR", 15),
+    TENURE_EARLY: num("ATTRITION_WEIGHT_TENURE_EARLY", 5),
+    TENURE_LONG_NEG: num("ATTRITION_WEIGHT_TENURE_LONG", -10),
+    SENTIMENT: num("ATTRITION_WEIGHT_SENTIMENT", 20),
+    LEAVE_ANNUAL_LOW: num("ATTRITION_WEIGHT_LEAVE_ANNUAL_LOW", 8),
+    LEAVE_SICK_LOW: num("ATTRITION_WEIGHT_LEAVE_SICK_LOW", 4),
+    SALARY_12M: num("ATTRITION_WEIGHT_SALARY_REVIEW_12", 10),
+    SALARY_24M: num("ATTRITION_WEIGHT_SALARY_REVIEW_24", 20),
+  },
+  LIMITS: {
+    REVIEW_STALENESS_CAP: num("ATTRITION_REVIEW_STALENESS_CAP", 18),
+    RISK_HISTORY_MAX: num("ATTRITION_RISK_HISTORY_MAX", 12),
+  },
+};
+
+export type AttritionWeights = typeof AttritionConfig.WEIGHTS;
