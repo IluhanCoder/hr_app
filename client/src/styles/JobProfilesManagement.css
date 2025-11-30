@@ -1,0 +1,290 @@
+.job-profiles-management {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.profiles-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.profiles-header h1 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.profiles-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.profiles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.profile-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.profile-header h3 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.2rem;
+  flex: 1;
+}
+
+.profile-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.department-badge {
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.btn-delete {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.3rem 0.5rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  opacity: 0.6;
+}
+
+.btn-delete:hover {
+  background: #fee;
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.profile-stats {
+  display: flex;
+  gap: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ecf0f1;
+}
+
+.profile-stats .stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.profile-stats .stat-label {
+  color: #7f8c8d;
+  font-size: 0.85rem;
+}
+
+.profile-stats .stat-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #3498db;
+}
+
+
+.modal-content.large {
+  max-width: 900px;
+}
+
+.form-section {
+  padding: 1.5rem;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.form-section:last-child {
+  border-bottom: none;
+}
+
+.form-section h3 {
+  margin: 0 0 1rem 0;
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  align-items: end;
+}
+
+.skills-list-form {
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+}
+
+.skills-list-form table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #f8f9fa;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.skills-list-form thead {
+  background: #e9ecef;
+}
+
+.skills-list-form th,
+.skills-list-form td {
+  padding: 0.75rem;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.skills-list-form th {
+  font-weight: 600;
+  color: #495057;
+}
+
+.level-badge {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.level-badge.level-0 {
+  background: #f1f3f5;
+  color: #868e96;
+}
+
+.level-badge.level-1 {
+  background: #fff3bf;
+  color: #f59f00;
+}
+
+.level-badge.level-2 {
+  background: #d3f9d8;
+  color: #37b24d;
+}
+
+.level-badge.level-3 {
+  background: #d0ebff;
+  color: #1971c2;
+}
+
+.level-badge.level-4 {
+  background: #e7f5ff;
+  color: #1864ab;
+  border: 2px solid #1971c2;
+}
+
+.btn-remove {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.btn-remove:hover {
+  opacity: 0.7;
+}
+
+.add-skill-form {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.btn-add {
+  padding: 0.75rem 1.5rem;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.btn-add:hover {
+  background: #218838;
+}
+
+.profile-details {
+  padding: 1.5rem;
+}
+
+.detail-row {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.profile-details h3 {
+  margin: 1.5rem 0 1rem 0;
+  color: #2c3e50;
+}
+
+.skills-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.skills-table thead {
+  background: #f8f9fa;
+}
+
+.skills-table th,
+.skills-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.skills-table th {
+  font-weight: 600;
+  color: #495057;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: #7f8c8d;
+}
+
+.empty-state p {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
