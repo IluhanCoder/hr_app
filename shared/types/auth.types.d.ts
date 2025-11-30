@@ -1,4 +1,3 @@
-
 import type { UserRole } from "./user.types.js";
 export interface JWTPayload {
     userId: string;
@@ -26,3 +25,4 @@ export interface RegisterRequest {
     firstName: string;
     lastName: string;
 }
+//# sourceMappingURL=auth.types.d.ts.map

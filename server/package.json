@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "type": "module",
   "description": "HR Management System Backend",
-  "main": "dist/src/app.js",
+  "main": "dist/server/src/app.js",
   "scripts": {
     "dev": "tsx watch src/app.ts",
     "build": "tsc",
-    "start": "node dist/src/app.js",
+    "start": "node dist/server/src/app.js",
     "clean": "rm -rf dist",
     "migrate:salary": "tsx src/scripts/migrate-salary-info.ts",
     "migrate:demographics": "tsx src/scripts/migrate-demographics.ts",
@@ -48,6 +48,7 @@
     "nodemon": "^3.1.11",
     "pdfkit": "^0.17.2",
     "regression": "^2.0.1",
+    "sentiment": "^5.0.2",
     "simple-statistics": "^7.8.8"
   }
 }

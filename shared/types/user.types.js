@@ -1,4 +1,3 @@
-
 export var UserRole;
 (function (UserRole) {
     UserRole["EMPLOYEE"] = "employee";
@@ -8,7 +7,6 @@ export var UserRole;
     UserRole["RECRUITER"] = "recruiter";
     UserRole["ADMIN"] = "admin";
 })(UserRole || (UserRole = {}));
-
 export var UserStatus;
 (function (UserStatus) {
     UserStatus["ACTIVE"] = "active";
@@ -16,7 +14,6 @@ export var UserStatus;
     UserStatus["TERMINATED"] = "terminated";
     UserStatus["SUSPENDED"] = "suspended";
 })(UserStatus || (UserStatus = {}));
-
 export var Department;
 (function (Department) {
     Department["IT"] = "it";
@@ -27,7 +24,6 @@ export var Department;
     Department["OPERATIONS"] = "operations";
     Department["SUPPORT"] = "support";
 })(Department || (Department = {}));
-
 export var EmploymentType;
 (function (EmploymentType) {
     EmploymentType["FULL_TIME"] = "full_time";
@@ -35,3 +31,19 @@ export var EmploymentType;
     EmploymentType["CONTRACT"] = "contract";
     EmploymentType["INTERN"] = "intern";
 })(EmploymentType || (EmploymentType = {}));
+export var Gender;
+(function (Gender) {
+    Gender["MALE"] = "male";
+    Gender["FEMALE"] = "female";
+    Gender["NON_BINARY"] = "non_binary";
+    Gender["PREFER_NOT_TO_SAY"] = "prefer_not_to_say";
+})(Gender || (Gender = {}));
+export var EducationLevel;
+(function (EducationLevel) {
+    EducationLevel["HIGH_SCHOOL"] = "high_school";
+    EducationLevel["BACHELOR"] = "bachelor";
+    EducationLevel["MASTER"] = "master";
+    EducationLevel["PHD"] = "phd";
+    EducationLevel["OTHER"] = "other";
+})(EducationLevel || (EducationLevel = {}));
+//# sourceMappingURL=user.types.js.map

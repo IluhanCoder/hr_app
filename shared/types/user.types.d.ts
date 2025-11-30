@@ -1,4 +1,3 @@
-
 export declare enum UserRole {
     EMPLOYEE = "employee",
     LINE_MANAGER = "line_manager",
@@ -28,6 +27,19 @@ export declare enum EmploymentType {
     CONTRACT = "contract",
     INTERN = "intern"
 }
+export declare enum Gender {
+    MALE = "male",
+    FEMALE = "female",
+    NON_BINARY = "non_binary",
+    PREFER_NOT_TO_SAY = "prefer_not_to_say"
+}
+export declare enum EducationLevel {
+    HIGH_SCHOOL = "high_school",
+    BACHELOR = "bachelor",
+    MASTER = "master",
+    PHD = "phd",
+    OTHER = "other"
+}
 export interface UserCredentials {
     email: string;
     password: string;
@@ -45,6 +57,7 @@ export interface PersonalInfo {
     lastName: string;
     middleName?: string;
     dateOfBirth: Date;
+    gender?: Gender;
     phone: string;
     email: string;
     address?: {
@@ -59,10 +72,12 @@ export interface PersonalInfo {
         relationship: string;
         phone: string;
     };
+    ethnicity?: string;
+    educationLevel?: EducationLevel;
 }
 export interface JobInfo {
     jobTitle: string;
-    department: Department;
+    department: string;
     employmentType: EmploymentType;
     hireDate: Date;
     terminationDate?: Date;
@@ -77,10 +92,13 @@ export interface SalaryInfo {
     nextSalaryReview?: Date;
 }
 export interface LeaveBalance {
-    totalDays: number;
-    usedDays: number;
-    remainingDays: number;
-    year: number;
+    annual: number;
+    sick: number;
+    personal: number;
+    totalDays?: number;
+    usedDays?: number;
+    remainingDays?: number;
+    year?: number;
 }
 export interface Skill {
     name: string;
@@ -119,3 +137,4 @@ export interface UpdateUserDTO {
     skills?: Skill[];
     status?: UserStatus;
 }
+//# sourceMappingURL=user.types.d.ts.map
