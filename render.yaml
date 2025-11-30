@@ -18,11 +18,12 @@ services:
         value: https://hr-app-frontend.onrender.com
       - key: NODE_ENV
         value: production
-  - type: static
+  - type: static_site
     name: hr-app-frontend
     rootDir: client
     buildCommand: npm install && npm run build
     publishPath: build
+    autoDeploy: true
     envVars:
       - key: REACT_APP_API_URL
         value: https://hr-app-backend.onrender.com/api
