@@ -31,7 +31,7 @@
 | **Root Directory** | `server` |
 | **Runtime** | `Node` |
 | **Build Command** | `npm install && npm run build` |
-| **Start Command** | `node dist/app.js` |
+| **Start Command** | `node dist/server/src/app.js` |
 | **Instance Type** | `Free` (для початку) |
 
 ### 1.4. Додайте змінні середовища (Environment Variables)
