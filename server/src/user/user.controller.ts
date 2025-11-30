@@ -145,6 +145,7 @@ export const login = async (req: AuthRequest, res: Response): Promise<void> => {
     const user = await User.findOne({ email }).select("+passwordHash");
 
     if (!user) {
+      console.warn("🔐 Login failed: user not found", { email });
       res.status(401).json({
         success: false,
         message: "Invalid credentials",
@@ -155,6 +156,7 @@ export const login = async (req: AuthRequest, res: Response): Promise<void> => {
     const isPasswordValid = await user.comparePassword(password);
 
     if (!isPasswordValid) {
+      console.warn("🔐 Login failed: invalid password", { email });
       res.status(401).json({
         success: false,
         message: "Invalid credentials",
@@ -185,6 +187,7 @@ export const login = async (req: AuthRequest, res: Response): Promise<void> => {
       data: authResponse,
     });
   } catch (error) {
+    console.error("❌ Login error:", error);
     res.status(500).json({
       success: false,
       message: "Login failed",
