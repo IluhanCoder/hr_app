@@ -1,11 +1,11 @@
 
 
 import React, { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { UkDatePicker } from "../components/UkDatePicker";
 import { observer } from "mobx-react-lite";
 import { useStores } from "../stores/RootStore";
 import { toast } from "react-toastify";
-import { useSearchParams } from "react-router-dom";
 
 interface UserProfile {
   id: string;
@@ -64,6 +64,7 @@ interface LeaveRequest {
 
 const EmployeeSelfService: React.FC = observer(() => {
   const { authStore } = useStores();
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [paySlips, setPaySlips] = useState<PaySlip[]>([]);

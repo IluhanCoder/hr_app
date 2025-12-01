@@ -1,6 +1,7 @@
 
 
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { useStores } from "../stores/RootStore";
 
@@ -37,6 +38,7 @@ interface LeaveRequest {
 
 const LeaveApprovals: React.FC = observer(() => {
   const { authStore } = useStores();
+  const navigate = useNavigate();
   const [pendingRequests, setpendingRequests] = useState<LeaveRequest[]>([]);
   const [allRequests, setAllRequests] = useState<LeaveRequest[]>([]);
   const [isLoading, setIsLoading] = useState(false);

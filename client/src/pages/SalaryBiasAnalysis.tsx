@@ -282,7 +282,7 @@ const SalaryBiasAnalysis: React.FC = () => {
                 Експорт CSV
               </button>
               <button
-                onClick={exportJSON}}
+                onClick={exportJSON}
                 className="px-5 py-2.5 rounded-lg font-semibold bg-gray-800 hover:bg-black text-white shadow-sm"
               >
                 Експорт JSON

@@ -1,6 +1,7 @@
 
 
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { useStores } from "../stores/RootStore";
 
@@ -35,6 +36,7 @@ interface DepartmentForm {
 
 const OrganizationStructure: React.FC = observer(() => {
   const { authStore } = useStores();
+  const navigate = useNavigate();
   const [hierarchy, setHierarchy] = useState<Department[]>([]);
   const [departments, setDepartments] = useState<Department[]>([]);
   const [employees, setEmployees] = useState<any[]>([]);
