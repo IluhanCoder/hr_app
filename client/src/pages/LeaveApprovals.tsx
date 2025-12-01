@@ -274,12 +274,12 @@ const LeaveApprovals: React.FC = observer(() => {
                           </div>
                           <div>
                             <h3 className="text-xl font-bold text-gray-800">
-                              {request.employeeId.personalInfo.firstName}{" "}
-                              {request.employeeId.personalInfo.lastName}
+                              {request.employeeId?.personalInfo?.firstName || "N/A"}{" "}
+                              {request.employeeId?.personalInfo?.lastName || ""}
                             </h3>
                             <p className="text-sm text-gray-600">
-                              {request.employeeId.jobInfo.jobTitle} •{" "}
-                              {request.employeeId.jobInfo.department}
+                              {request.employeeId?.jobInfo?.jobTitle || "N/A"} •{" "}
+                              {request.employeeId?.jobInfo?.department || "N/A"}
                             </p>
                           </div>
                         </div>
@@ -414,11 +414,11 @@ const LeaveApprovals: React.FC = observer(() => {
                           <tr key={request._id} className="hover:bg-gray-50">
                             <td className="px-6 py-4">
                               <div className="font-medium text-gray-900">
-                                {request.employeeId.personalInfo.firstName}{" "}
-                                {request.employeeId.personalInfo.lastName}
+                                {request.employeeId?.personalInfo?.firstName || "N/A"}{" "}
+                                {request.employeeId?.personalInfo?.lastName || ""}
                               </div>
                               <div className="text-sm text-gray-500">
-                                {request.employeeId.jobInfo.jobTitle}
+                                {request.employeeId?.jobInfo?.jobTitle || "N/A"}
                               </div>
                             </td>
                             <td className="px-6 py-4">
