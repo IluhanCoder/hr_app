@@ -1,6 +1,7 @@
 
 
 import React, { useState, useEffect } from "react";
+import apiClient from "../services/api";
 import { UkDatePicker } from "../components/UkDatePicker";
 import { observer } from "mobx-react-lite";
 import { useStores } from "../stores/RootStore";
@@ -60,6 +61,10 @@ const GoalsManagement: React.FC = observer(() => {
   const [success, setSuccess] = useState("");
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [selectedGoal, setSelectedGoal] = useState<Goal | null>(null);
+  const [showProgressModal, setShowProgressModal] = useState(false);
+  const [progressValue, setProgressValue] = useState("");
+  const [progressComment, setProgressComment] = useState("");
+  const [savingProgress, setSavingProgress] = useState(false);
 
   const [filterStatus, setFilterStatus] = useState<string>("all");
   const [filterType, setFilterType] = useState<string>("all");
@@ -642,6 +647,17 @@ const GoalsManagement: React.FC = observer(() => {
                       Деталі
                     </button>
                     <button
+                      onClick={() => {
+                        setSelectedGoal(goal);
+                        setProgressValue("");
+                        setProgressComment("");
+                        setShowProgressModal(true);
+                      }}
+                      className="px-4 py-2 bg-purple-600 text-white rounded-lg text-sm font-semibold hover:bg-purple-700 transition-colors"
+                    >
+                      Оновити прогрес
+                    </button>
+                    <button
                       onClick={() => handleDeleteGoal(goal._id)}
                       className="px-4 py-2 bg-red-600 text-white rounded-lg text-sm font-semibold hover:bg-red-700 transition-colors"
                     >
@@ -794,6 +810,79 @@ const GoalsManagement: React.FC = observer(() => {
                   className="px-6 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-semibold transition-colors"
                 >
                   Закрити
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showProgressModal && selectedGoal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-2xl w-full max-w-md">
+            <div className="p-6">
+              <div className="flex justify-between items-start mb-4">
+                <h3 className="text-xl font-bold text-gray-800">Оновити прогрес</h3>
+                <button
+                  onClick={() => setShowProgressModal(false)}
+                  className="text-gray-400 hover:text-gray-600 text-2xl"
+                >
+                  ×
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Нове значення *</label>
+                  <input
+                    type="number"
+                    value={progressValue}
+                    onChange={(e) => setProgressValue(e.target.value)}
+                    placeholder={`Поточне: ${selectedGoal.currentValue}`}
+                    className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Коментар (опціонально)</label>
+                  <textarea
+                    rows={3}
+                    value={progressComment}
+                    onChange={(e) => setProgressComment(e.target.value)}
+                    className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none"
+                    placeholder="Опишіть зміну..."
+                  />
+                </div>
+              </div>
+
+              <div className="mt-6 flex justify-end gap-2">
+                <button
+                  onClick={() => setShowProgressModal(false)}
+                  className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-semibold"
+                >
+                  Скасувати
+                </button>
+                <button
+                  disabled={savingProgress}
+                  onClick={async () => {
+                    if (!progressValue) return;
+                    setSavingProgress(true);
+                    try {
+                      await apiClient.post(`/goals/${selectedGoal._id}/progress`, {
+                        newValue: parseFloat(progressValue),
+                        comment: progressComment,
+                      });
+                      setShowProgressModal(false);
+                      setProgressValue("");
+                      setProgressComment("");
+                      await loadGoals();
+                    } catch (e) {
+                    } finally {
+                      setSavingProgress(false);
+                    }
+                  }}
+                  className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-semibold"
+                >
+                  {savingProgress ? "Збереження..." : "Зберегти"}
                 </button>
               </div>
             </div>
