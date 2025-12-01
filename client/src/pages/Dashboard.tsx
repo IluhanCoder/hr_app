@@ -273,18 +273,6 @@ const Dashboard: React.FC = observer(() => {
 
           {}
           <div className="bg-white rounded-xl p-8 shadow-md transition-all hover:-translate-y-1 hover:shadow-xl">
-            <div className="text-5xl mb-4">👥</div>
-            <h3 className="text-xl font-bold text-gray-800 mb-2">Моя Команда</h3>
-            <p className="text-gray-600 text-sm mb-5">
-              Переглядайте членів команди
-            </p>
-            <button className="w-full bg-gradient-to-r from-[#667eea] to-[#764ba2] text-white py-2.5 rounded-lg font-semibold transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/40">
-              Переглянути
-            </button>
-          </div>
-
-          {}
-          <div className="bg-white rounded-xl p-8 shadow-md transition-all hover:-translate-y-1 hover:shadow-xl">
             <div className="text-5xl mb-4">📊</div>
             <h3 className="text-xl font-bold text-gray-800 mb-2">
               {user?.role === "line_manager" || user?.role === "hr_manager" || user?.role === "admin"
