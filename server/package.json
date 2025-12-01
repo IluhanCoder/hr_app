@@ -20,7 +20,8 @@
     "migrate:performance-potential": "tsx src/scripts/migrate.performance.potential.ts",
     "seed:time": "tsx src/scripts/seed.time.demo.ts",
     "migrate:set-demo-passwords": "tsx src/scripts/migrate.set.demo.passwords.ts",
-    "seed:full-demo": "tsx src/scripts/seed.full.demo.ts"
+    "seed:full-demo": "tsx src/scripts/seed.full.demo.ts",
+    "normalize:job-titles": "tsx src/scripts/normalize-job-titles.ts"
   },
   "keywords": [],
   "author": "",
@@ -40,7 +41,6 @@
     "@types/regression": "^2.0.6",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
-    "typescript": "^5.9.3",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
@@ -49,6 +49,7 @@
     "pdfkit": "^0.17.2",
     "regression": "^2.0.1",
     "sentiment": "^5.0.2",
-    "simple-statistics": "^7.8.8"
+    "simple-statistics": "^7.8.8",
+    "typescript": "^5.9.3"
   }
 }
