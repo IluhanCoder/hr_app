@@ -112,10 +112,28 @@ export default function AttritionRisk() {
 
   return (
     <div style={{ padding: 24 }}>
-      <h2>🔥 Ризик звільнення (Attrition Risk)</h2>
-      <p style={{ color: "#666", marginBottom: 16 }}>
-        Rule-based скоринг з історією зміни ризику. Натисни "Перерахувати" щоб оновити дані.
-      </p>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+        <div>
+          <h2>🔥 Ризик звільнення (Attrition Risk)</h2>
+          <p style={{ color: "#666", marginBottom: 0 }}>
+            Rule-based скоринг з історією зміни ризику. Натисни "Перерахувати" щоб оновити дані.
+          </p>
+        </div>
+        <button
+          onClick={() => window.location.href = "/dashboard"}
+          style={{
+            background: "rgba(102, 126, 234, 0.2)",
+            color: "#667eea",
+            padding: "10px 20px",
+            border: "1px solid rgba(102, 126, 234, 0.3)",
+            borderRadius: 8,
+            cursor: "pointer",
+            fontWeight: 600,
+          }}
+        >
+          ← Назад
+        </button>
+      </div>
 
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 16 }}>
         <button

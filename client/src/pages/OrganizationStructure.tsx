@@ -257,10 +257,20 @@ const OrganizationStructure: React.FC = observer(() => {
       {}
       <header className="bg-gradient-to-r from-[#667eea] to-[#764ba2] text-white shadow-lg">
         <div className="max-w-7xl mx-auto px-5 py-5">
-          <h1 className="text-2xl font-bold">Організаційна Структура</h1>
-          <p className="text-sm opacity-90 mt-1">
-            Візуалізація та управління ієрархією компанії
-          </p>
+          <div className="flex justify-between items-center">
+            <div>
+              <h1 className="text-2xl font-bold">Організаційна Структура</h1>
+              <p className="text-sm opacity-90 mt-1">
+                Візуалізація та управління ієрархією компанії
+              </p>
+            </div>
+            <button
+              onClick={() => navigate("/dashboard")}
+              className="bg-white/20 hover:bg-white/30 border border-white/30 px-5 py-2 rounded-lg font-semibold transition-all"
+            >
+              ← Назад
+            </button>
+          </div>
         </div>
       </header>
 

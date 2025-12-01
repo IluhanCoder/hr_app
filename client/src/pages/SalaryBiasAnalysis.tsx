@@ -282,7 +282,7 @@ const SalaryBiasAnalysis: React.FC = () => {
                 Експорт CSV
               </button>
               <button
-                onClick={exportJSON}
+                onClick={exportJSON}}
                 className="px-5 py-2.5 rounded-lg font-semibold bg-gray-800 hover:bg-black text-white shadow-sm"
               >
                 Експорт JSON
@@ -297,6 +297,12 @@ const SalaryBiasAnalysis: React.FC = () => {
               {showRaw ? "Сховати JSON" : "Показати JSON"}
             </button>
           )}
+          <button
+            onClick={() => window.location.href = "/dashboard"}
+            className="px-5 py-2.5 rounded-lg font-semibold bg-indigo-100 hover:bg-indigo-200 text-indigo-700 shadow-sm"
+          >
+            ← Назад
+          </button>
         </div>
       </div>
 
