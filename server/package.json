@@ -21,7 +21,8 @@
     "seed:time": "tsx src/scripts/seed.time.demo.ts",
     "migrate:set-demo-passwords": "tsx src/scripts/migrate.set.demo.passwords.ts",
     "seed:full-demo": "tsx src/scripts/seed.full.demo.ts",
-    "normalize:job-titles": "tsx src/scripts/normalize-job-titles.ts"
+    "normalize:job-titles": "tsx src/scripts/normalize-job-titles.ts",
+    "add:skills-to-juniors": "tsx src/scripts/add-skills-to-juniors.ts"
   },
   "keywords": [],
   "author": "",
