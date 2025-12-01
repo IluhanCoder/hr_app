@@ -130,34 +130,13 @@ export const getMyLeaveRequests = async (req: AuthRequest, res: Response): Promi
 
 export const getPendingLeaveRequests = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
-    const userId = req.user?.userId;
+    const managerId = req.user?.userId;
 
-    const currentUser = await User.findById(userId);
-    if (!currentUser) {
-      res.status(404).json({
-        success: false,
-        message: "Користувач не знайдений",
-      });
-      return;
-    }
-
-    const query: any = {
+    const requests = await LeaveRequest.find({
+      managerId: managerId as any,
       status: LeaveStatus.PENDING,
-    };
-
-    // Line managers only see requests from their department employees
-    if (currentUser.role === "line_manager") {
-      const departmentEmployees = await User.find({
-        "jobInfo.department": currentUser.jobInfo.department,
-      }).select("_id");
-
-      query.employeeId = { $in: departmentEmployees.map((e) => e._id) };
-    }
-    // HR managers and admins see all pending requests (no additional filter)
-
-    const requests = await LeaveRequest.find(query)
+    })
       .populate("employeeId", "personalInfo email jobInfo")
-      .populate("managerId", "personalInfo email")
       .sort({ createdAt: -1 });
 
     res.status(200).json({
