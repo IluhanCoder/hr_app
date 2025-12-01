@@ -239,18 +239,24 @@ export const teamGapAnalysis = async (req: AuthRequest, res: Response) => {
         if (byTitle.length > employees.length) {
           console.log(`↪️ Using jobTitle fallback for team scope: '${jobProfile.jobTitle}' matched ${byTitle.length} employees (was ${employees.length})`);
           employees = byTitle;
-        } else if (byTitle.length === 0) {
-          // Loose match: allow words in order (e.g., "junior react developer")
-          const loose = new RegExp(jobProfile.jobTitle.trim().split(/\s+/).map(escapeRegex).join(".*"), "i");
-          const byLooseTitle = await User.find({
-            status: "active",
-            "jobInfo.jobTitle": { $regex: loose },
-          })
-            .select("personalInfo jobInfo skills")
-            .populate("skills.skillId", "name");
-          if (byLooseTitle.length > employees.length) {
-            console.log(`↪️ Using loose jobTitle fallback: '${jobProfile.jobTitle}' matched ${byLooseTitle.length} employees (was ${employees.length})`);
-            employees = byLooseTitle;
+        } else {
+          // Loose match v2: require all tokens to appear in any order (e.g., junior/react/developer)
+          const rawTokens = jobProfile.jobTitle.trim().split(/\s+/).filter(Boolean);
+          const tokens = Array.from(new Set(rawTokens.map(t => t.toLowerCase())));
+          if (tokens.length > 0) {
+            const andClauses = tokens.map(t => ({
+              "jobInfo.jobTitle": { $regex: new RegExp(escapeRegex(t), "i") },
+            }));
+            const byAllTokens = await User.find({
+              status: "active",
+              $and: andClauses,
+            })
+              .select("personalInfo jobInfo skills")
+              .populate("skills.skillId", "name");
+            if (byAllTokens.length > employees.length) {
+              console.log(`↪️ Using token-all-order-agnostic fallback: '${jobProfile.jobTitle}' matched ${byAllTokens.length} employees (was ${employees.length})`);
+              employees = byAllTokens;
+            }
           }
         }
       }
@@ -516,5 +522,35 @@ export const getSkillLevels = async (req: AuthRequest, res: Response) => {
       success: false,
       message: "Помилка при отриманні рівнів",
     });
+  }
+};
+
+
+// Debug endpoint to verify counts by department and job title
+export const teamStatsDebug = async (req: AuthRequest, res: Response) => {
+  try {
+    const deptAgg = await User.aggregate([
+      { $match: { status: "active" } },
+      { $group: { _id: "$jobInfo.department", count: { $sum: 1 } } },
+      { $sort: { count: -1 } },
+    ]);
+
+    const titleAgg = await User.aggregate([
+      { $match: { status: "active" } },
+      { $group: { _id: "$jobInfo.jobTitle", count: { $sum: 1 } } },
+      { $sort: { count: -1 } },
+      { $limit: 50 },
+    ]);
+
+    res.json({
+      success: true,
+      data: {
+        departments: deptAgg.map((d) => ({ department: d._id || "(empty)", count: d.count })),
+        jobTitles: titleAgg.map((t) => ({ jobTitle: t._id || "(empty)", count: t.count })),
+      },
+    });
+  } catch (error) {
+    console.error("❌ teamStatsDebug error:", error);
+    res.status(500).json({ success: false, message: "Debug failed" });
   }
 };

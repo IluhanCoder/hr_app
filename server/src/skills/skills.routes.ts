@@ -12,6 +12,7 @@ import {
   employeeGapAnalysis,
   getSkillCategories,
   getSkillLevels,
+  teamStatsDebug,
 } from "./skills.controller.js";
 
 const router = Router();
@@ -35,5 +36,8 @@ router.delete("/job-profiles/:id", requireHRAccess, deleteJobProfile);
 router.post("/gap-analysis/team", requireHRAccess, teamGapAnalysis);
 
 router.post("/gap-analysis/employee", requireHRAccess, employeeGapAnalysis);
+
+// Debug endpoint to verify counts by department and job title
+router.get("/debug/team-stats", requireHRAccess, teamStatsDebug);
 
 export default router;
