@@ -195,7 +195,7 @@ export const teamGapAnalysis = async (req: AuthRequest, res: Response) => {
       filter["jobInfo.department"] = new RegExp(`^${departmentToFilter}$`, 'i');
     }
 
-    const employees = await User.find(filter)
+    let employees = await User.find(filter)
       .select("personalInfo jobInfo skills")
       .populate("skills.skillId", "name");
 
@@ -222,6 +222,40 @@ export const teamGapAnalysis = async (req: AuthRequest, res: Response) => {
           department: e.jobInfo.department
         }))
       );
+    }
+
+    // Fallback: if team size is very small, try matching by job title (case-insensitive)
+    try {
+      if (employees.length <= 1 && jobProfile?.jobTitle) {
+        const escapeRegex = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const titleExact = new RegExp(`^${escapeRegex(jobProfile.jobTitle)}$`, "i");
+        const byTitle = await User.find({
+          status: "active",
+          "jobInfo.jobTitle": { $regex: titleExact },
+        })
+          .select("personalInfo jobInfo skills")
+          .populate("skills.skillId", "name");
+
+        if (byTitle.length > employees.length) {
+          console.log(`↪️ Using jobTitle fallback for team scope: '${jobProfile.jobTitle}' matched ${byTitle.length} employees (was ${employees.length})`);
+          employees = byTitle;
+        } else if (byTitle.length === 0) {
+          // Loose match: allow words in order (e.g., "junior react developer")
+          const loose = new RegExp(jobProfile.jobTitle.trim().split(/\s+/).map(escapeRegex).join(".*"), "i");
+          const byLooseTitle = await User.find({
+            status: "active",
+            "jobInfo.jobTitle": { $regex: loose },
+          })
+            .select("personalInfo jobInfo skills")
+            .populate("skills.skillId", "name");
+          if (byLooseTitle.length > employees.length) {
+            console.log(`↪️ Using loose jobTitle fallback: '${jobProfile.jobTitle}' matched ${byLooseTitle.length} employees (was ${employees.length})`);
+            employees = byLooseTitle;
+          }
+        }
+      }
+    } catch (fallbackErr) {
+      console.warn("Fallback by jobTitle failed:", fallbackErr);
     }
 
     const requiredVector: Map<string, { level: number; weight: number; isMandatory: boolean }> =
