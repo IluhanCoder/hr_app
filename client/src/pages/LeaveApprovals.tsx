@@ -63,6 +63,8 @@ const LeaveApprovals: React.FC = observer(() => {
       const pendingData = await pendingRes.json();
       const allData = await allRes.json();
 
+      console.log("📊 Leave requests data:", { pending: pendingData, all: allData });
+
       if (pendingData.success) setpendingRequests(pendingData.data);
       if (allData.success) setAllRequests(allData.data);
     } catch (err) {
