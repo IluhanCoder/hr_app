@@ -174,25 +174,17 @@ const CandidateDetails: React.FC = observer(() => {
     if (!candidate) return;
 
     try {
-
       const stagesRequiringInterview = ["technical", "hr_interview", "final"];
-                      <UkDateTimePicker
-                        selected={moveForm.interview?.scheduledAt ? new Date(moveForm.interview.scheduledAt) : null}
-                        onChange={(date: Date | null) =>
-                          setMoveForm({
-                            ...moveForm,
-                            interview: {
-                              ...moveForm.interview,
-                              scheduledAt: date ? date.toISOString() : "",
-                              interviewers: moveForm.interview?.interviewers ?? [],
-                            },
-                          })
-                        }
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-                        required
-                        placeholderText="Оберіть дату та час"
-                        isClearable
-                      />
+      
+      if (stagesRequiringInterview.includes(moveForm.stage) && !moveForm.interview?.scheduledAt) {
+        toast.error("Для цього етапу необхідно запланувати інтерв'ю");
+        return;
+      }
+
+      await apiClient.post(`/recruitment/${candidate.id}/move`, moveForm);
+      toast.success("Кандидата успішно переміщено!");
+      setShowMoveModal(false);
+      fetchCandidate();
 
       setMoveForm({
         stage: "screening" as RecruitmentStage,
