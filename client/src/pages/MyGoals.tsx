@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { useStores } from "../stores/RootStore";
 import { useNavigate } from "react-router-dom";
+import apiClient from "../services/api";
 
 interface Goal {
   _id: string;
@@ -45,11 +46,8 @@ const MyGoals: React.FC = observer(() => {
   const loadMyGoals = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:5001/api/goals/my", {
-        headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
-      });
-
-      const data = await response.json();
+      const response = await apiClient.get("/goals/my");
+      const data = response.data;
       if (data.success) {
         setGoals(data.data);
       }
@@ -71,19 +69,12 @@ const MyGoals: React.FC = observer(() => {
     setSuccess("");
 
     try {
-      const response = await fetch(`http://localhost:5001/api/goals/${goalId}/progress`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-        },
-        body: JSON.stringify({
-          newValue: parseFloat(progressValue),
-          comment: progressComment,
-        }),
+      const response = await apiClient.post(`/goals/${goalId}/progress`, {
+        newValue: parseFloat(progressValue),
+        comment: progressComment,
       });
 
-      const data = await response.json();
+      const data = response.data;
 
       if (data.success) {
         setSuccess("Прогрес оновлено!");
