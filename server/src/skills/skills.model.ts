@@ -64,7 +64,6 @@ const skillSchema = new Schema<ISkill>(
   }
 );
 
-skillSchema.index({ name: 1 });
 skillSchema.index({ category: 1 });
 skillSchema.index({ isActive: 1 });
 
