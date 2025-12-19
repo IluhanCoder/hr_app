@@ -1,13 +1,14 @@
 
 
 import React, { useState, useEffect } from "react";
-const API_URL = process.env.REACT_APP_API_URL;
 import { observer } from "mobx-react-lite";
 import { useStores } from "../stores/RootStore";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ConfirmDialog from "../components/ConfirmDialog";
 import PromptDialog from "../components/PromptDialog";
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 interface Department {
   id: string;

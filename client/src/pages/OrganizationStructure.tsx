@@ -1,10 +1,11 @@
 
 
 import React, { useState, useEffect } from "react";
-const API_URL = process.env.REACT_APP_API_URL;
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { useStores } from "../stores/RootStore";
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 interface Department {
   id: string;
