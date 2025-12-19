@@ -1,6 +1,7 @@
 
 
 import React, { useState, useEffect } from "react";
+const API_URL = process.env.REACT_APP_API_URL;
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { useStores } from "../stores/RootStore";
@@ -59,13 +60,13 @@ const OrganizationStructure: React.FC = observer(() => {
     setIsLoading(true);
     try {
       const [hierarchyRes, deptsRes, employeesRes] = await Promise.all([
-        fetch("http://localhost:5001/api/departments/hierarchy", {
+        fetch(`${API_URL}/departments/hierarchy`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
         }),
-        fetch("http://localhost:5001/api/departments", {
+        fetch(`${API_URL}/departments`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
         }),
-        fetch("http://localhost:5001/api/users", {
+        fetch(`${API_URL}/users`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
         }),
       ]);
@@ -113,8 +114,8 @@ const OrganizationStructure: React.FC = observer(() => {
 
     try {
       const url = editingDept
-        ? `http://localhost:5001/api/departments/${editingDept.id}`
-        : "http://localhost:5001/api/departments";
+        ? `${API_URL}/departments/${editingDept.id}`
+        : `${API_URL}/departments`;
 
       const response = await fetch(url, {
         method: editingDept ? "PUT" : "POST",
@@ -165,7 +166,7 @@ const OrganizationStructure: React.FC = observer(() => {
     }
 
     try {
-      const response = await fetch(`http://localhost:5001/api/departments/${deptId}`, {
+      const response = await fetch(`${API_URL}/departments/${deptId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("authToken")}`,

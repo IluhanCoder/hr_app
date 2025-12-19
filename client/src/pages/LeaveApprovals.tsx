@@ -1,6 +1,7 @@
 
 
 import React, { useState, useEffect } from "react";
+const API_URL = process.env.REACT_APP_API_URL;
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { useStores } from "../stores/RootStore";
@@ -52,10 +53,10 @@ const LeaveApprovals: React.FC = observer(() => {
     setIsLoading(true);
     try {
       const [pendingRes, allRes] = await Promise.all([
-        fetch("http://localhost:5001/api/leaves/pending", {
+        fetch(`${API_URL}/leaves/pending`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
         }),
-        fetch("http://localhost:5001/api/leaves", {
+        fetch(`${API_URL}/leaves`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
         }),
       ]);
@@ -84,7 +85,7 @@ const LeaveApprovals: React.FC = observer(() => {
     setSuccess("");
 
     try {
-      const response = await fetch(`http://localhost:5001/api/leaves/${requestId}/approve`, {
+      const response = await fetch(`${API_URL}/leaves/${requestId}/approve`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -118,7 +119,7 @@ const LeaveApprovals: React.FC = observer(() => {
     setSuccess("");
 
     try {
-      const response = await fetch(`http://localhost:5001/api/leaves/${requestId}/reject`, {
+      const response = await fetch(`${API_URL}/leaves/${requestId}/reject`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

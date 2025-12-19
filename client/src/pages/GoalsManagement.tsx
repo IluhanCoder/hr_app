@@ -1,6 +1,7 @@
 
 
 import React, { useState, useEffect } from "react";
+const API_URL = process.env.REACT_APP_API_URL;
 import apiClient from "../services/api";
 import { UkDatePicker } from "../components/UkDatePicker";
 import { observer } from "mobx-react-lite";
@@ -92,7 +93,7 @@ const GoalsManagement: React.FC = observer(() => {
   const loadGoals = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:5001/api/goals", {
+      const response = await fetch(`${API_URL}/goals`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
       });
 
@@ -109,7 +110,7 @@ const GoalsManagement: React.FC = observer(() => {
 
   const loadEmployees = async () => {
     try {
-      const response = await fetch("http://localhost:5001/api/users", {
+      const response = await fetch(`${API_URL}/users`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
       });
 
@@ -127,7 +128,7 @@ const GoalsManagement: React.FC = observer(() => {
 
   const loadDepartments = async () => {
     try {
-      const response = await fetch("http://localhost:5001/api/departments", {
+      const response = await fetch(`${API_URL}/departments`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
       });
 
@@ -146,7 +147,7 @@ const GoalsManagement: React.FC = observer(() => {
     setSuccess("");
 
     try {
-      const response = await fetch("http://localhost:5001/api/goals", {
+      const response = await fetch(`${API_URL}/goals`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -185,7 +186,7 @@ const GoalsManagement: React.FC = observer(() => {
     if (!window.confirm("Ви впевнені, що хочете видалити цю ціль?")) return;
 
     try {
-      const response = await fetch(`http://localhost:5001/api/goals/${id}`, {
+      const response = await fetch(`${API_URL}/goals/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
       });

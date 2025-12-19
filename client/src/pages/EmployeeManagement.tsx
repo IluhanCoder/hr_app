@@ -1,6 +1,7 @@
 
 
 import React, { useState, useEffect } from "react";
+const API_URL = process.env.REACT_APP_API_URL;
 import { observer } from "mobx-react-lite";
 import { useStores } from "../stores/RootStore";
 import { useSearchParams, useNavigate } from "react-router-dom";
@@ -82,7 +83,7 @@ const EmployeeManagement: React.FC = observer(() => {
 
   const loadCandidateData = async (id: string) => {
     try {
-      const response = await fetch(`http://localhost:5001/api/recruitment/${id}/convert-to-employee`, {
+      const response = await fetch(`${API_URL}/recruitment/${id}/convert-to-employee`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("authToken")}`,
         },
@@ -115,7 +116,7 @@ const EmployeeManagement: React.FC = observer(() => {
 
   const fetchDepartments = async () => {
     try {
-      const response = await fetch("http://localhost:5001/api/departments", {
+      const response = await fetch(`${API_URL}/departments`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("authToken")}`,
         },
@@ -135,7 +136,7 @@ const EmployeeManagement: React.FC = observer(() => {
 
   const fetchJobProfiles = async () => {
     try {
-      const response = await fetch("http://localhost:5001/api/skills/job-profiles", {
+      const response = await fetch(`${API_URL}/skills/job-profiles`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("authToken")}`,
         },
@@ -156,7 +157,7 @@ const EmployeeManagement: React.FC = observer(() => {
   const loadEmployees = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:5001/api/users", {
+      const response = await fetch(`${API_URL}/users`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("authToken")}`,
         },
@@ -230,7 +231,7 @@ const EmployeeManagement: React.FC = observer(() => {
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5001/api/users/create-employee", {
+      const response = await fetch(`${API_URL}/users/create-employee`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -245,7 +246,7 @@ const EmployeeManagement: React.FC = observer(() => {
 
         if (candidateSkills.length > 0 && data.data?.id) {
           try {
-            await fetch(`http://localhost:5001/api/users/${data.data.id}/skills`, {
+            await fetch(`${API_URL}/users/${data.data.id}/skills`, {
               method: "PUT",
               headers: {
                 "Content-Type": "application/json",
@@ -292,7 +293,7 @@ const EmployeeManagement: React.FC = observer(() => {
     }
 
     try {
-      const response = await fetch(`http://localhost:5001/api/users/${employeeId}`, {
+      const response = await fetch(`${API_URL}/users/${employeeId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("authToken")}`,
@@ -333,7 +334,7 @@ const EmployeeManagement: React.FC = observer(() => {
 
     try {
       const response = await fetch(
-        `http://localhost:5001/api/users/${transferEmployee.id}/transfer-department`,
+        `${API_URL}/users/${transferEmployee.id}/transfer-department`,
         {
           method: "POST",
           headers: {

@@ -1,6 +1,7 @@
 
 
 import React, { useState, useEffect } from "react";
+const API_URL = process.env.REACT_APP_API_URL;
 import { observer } from "mobx-react-lite";
 import { useStores } from "../stores/RootStore";
 import { useNavigate } from "react-router-dom";
@@ -58,7 +59,7 @@ const ReviewTemplates: React.FC = observer(() => {
   const loadTemplates = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:5001/api/review-templates", {
+      const response = await fetch(`${API_URL}/review-templates`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
       });
 
@@ -114,7 +115,7 @@ const ReviewTemplates: React.FC = observer(() => {
     }
 
     try {
-      const response = await fetch("http://localhost:5001/api/review-templates", {
+      const response = await fetch(`${API_URL}/review-templates`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -142,7 +143,7 @@ const ReviewTemplates: React.FC = observer(() => {
     if (!window.confirm("Ви впевнені, що хочете видалити цей шаблон?")) return;
 
     try {
-      const response = await fetch(`http://localhost:5001/api/review-templates/${id}`, {
+      const response = await fetch(`${API_URL}/review-templates/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
       });

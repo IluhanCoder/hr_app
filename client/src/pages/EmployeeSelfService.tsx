@@ -1,6 +1,7 @@
 
 
 import React, { useState, useEffect } from "react";
+const API_URL = process.env.REACT_APP_API_URL;
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { UkDatePicker } from "../components/UkDatePicker";
 import { observer } from "mobx-react-lite";
@@ -87,7 +88,7 @@ const EmployeeSelfService: React.FC = observer(() => {
   const loadProfile = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:5001/api/users/me", {
+      const response = await fetch(`${API_URL}/users/me`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("authToken")}`,
         },
@@ -116,7 +117,7 @@ const EmployeeSelfService: React.FC = observer(() => {
       const period = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
 
       try {
-        const resp = await fetch(`http://localhost:5001/api/payroll/calculate?period=${period}`, {
+        const resp = await fetch(`${API_URL}/payroll/calculate?period=${period}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
         });
         const data = await resp.json();
@@ -140,7 +141,7 @@ const EmployeeSelfService: React.FC = observer(() => {
 
   const loadLeaveRequests = async () => {
     try {
-      const response = await fetch("http://localhost:5001/api/leaves/my", {
+      const response = await fetch(`${API_URL}/leaves/my`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("authToken")}`,
         },
@@ -167,7 +168,7 @@ const EmployeeSelfService: React.FC = observer(() => {
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5001/api/leaves", {
+      const response = await fetch(`${API_URL}/leaves`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -200,7 +201,7 @@ const EmployeeSelfService: React.FC = observer(() => {
     }
 
     try {
-      const response = await fetch(`http://localhost:5001/api/leaves/${requestId}`, {
+      const response = await fetch(`${API_URL}/leaves/${requestId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("authToken")}`,
